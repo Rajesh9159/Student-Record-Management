@@ -1,11 +1,9 @@
-
 #include "header.h"
-
 void SAVE(ST *ptr)
 {
     FILE *fp;
 
-    fp = fopen("student.dat", "wb");
+    fp = fopen("student.txt", "w");
 
     if (fp == NULL)
     {
@@ -16,13 +14,13 @@ void SAVE(ST *ptr)
     while (ptr != NULL)
     {
         // Save roll number
-        fwrite(&ptr->roll, sizeof(ptr->roll), 1, fp);
+        fprintf(fp, "%d\n", ptr->roll);
 
         // Save student name
-        fwrite(ptr->name, sizeof(ptr->name), 1, fp);
+        fprintf(fp, "%s\n", ptr->name);
 
         // Save percentage
-        fwrite(&ptr->percentage, sizeof(ptr->percentage), 1, fp);
+        fprintf(fp, "%.2f\n", ptr->percentage);
 
         ptr = ptr->next;
     }
@@ -31,4 +29,3 @@ void SAVE(ST *ptr)
 
     printf("Records Saved Successfully...\n");
 }
-
